@@ -1,0 +1,10 @@
+-- schema.sql
+CREATE TABLE IF NOT EXISTS users (
+ID     VARCHAR(60)  PRIMARY KEY,
+Name   VARCHAR      NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS yos (
+SenderID    VARCHAR  NOT NULL,
+ReceiverID  VARCHAR  NOT NULL
+);
