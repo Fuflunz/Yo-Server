@@ -1,35 +1,21 @@
 package com.example.blog
 
 import org.springframework.stereotype.Service
-import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.jdbc.core.query
 import java.util.*
-import kotlin.math.sin
-import kotlin.random.Random
 
 
 @Service
-class Userservice(private val db: JdbcTemplate){
+class Userservice(private val Repo: Repo){
 
-    fun findUsers(): List<User> = db.query("select * from users"){response, _ ->
-        User( response.getString("Name"), response.getString("ID"))
-    }
+    fun findUsers(): List<User>? = Repo.UserRead("all", "all")
 
-    fun findUserbyName(Name: String): List<User>? = db.query("select * from users where Name = ?", Name) { response, _ ->
-        User(response.getString("Name"), response.getString("ID"))
-    }
+    fun findUserByName(name: String): List<User>? = Repo.UserRead("Name", name)
 
-
-    fun findUserbyID(ID: String): User? = db.query("select * from users where ID = ?", ID) { response, _ ->
-        User(response.getString("Name"), response.getString("ID"))
-    }.singleOrNull()
+    fun findUserByID(id: String): List<User>? = Repo.UserRead("ID", id)
 
     fun createUser(user: User): User{
-        val ID = UUID.randomUUID().toString()
-        db.update(
-            "insert into users Values ( ?, ? )",
-            ID, user.Name
-        )
-        return user.copy(ID = ID)
+        val id = UUID.randomUUID().toString()
+        Repo.Update("users", id, user.name)
+        return user.copy(id = id)
     }
 }
