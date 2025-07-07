@@ -19,9 +19,9 @@ class UserRepo(private val db: JdbcTemplate){
         }
     }
 
-    fun UserUpdate(valueOne: String, valueTwo: String) =
+    fun UserUpdate(name: String, id: String) =
         db.update (
             "insert into users Values ( ?, ? )",
-            valueOne, valueTwo
+            id, name  //In SQL-Data id is first and name second
         )
 }
