@@ -5,13 +5,7 @@ import org.springframework.jdbc.core.query
 import org.springframework.stereotype.Repository
 
 @Repository
-class Repo(private val db: JdbcTemplate){
-
-    fun Update(table: String, valueOne: String, valueTwo: String) =
-        db.update (
-            "insert into $table Values ( ?, ? )",
-            valueOne, valueTwo
-        )
+class UserRepo(private val db: JdbcTemplate){
 
     fun UserRead(character: String, characterValue: String): List<User>? {
         if (character == "all") {
@@ -25,7 +19,9 @@ class Repo(private val db: JdbcTemplate){
         }
     }
 
-    fun YoRead(ReceiverID: String?): List<Yo>? = db.query("select * from yos where ReceiverID = ?", ReceiverID!!) { response, _ ->
-        Yo(response.getString("SenderID"), response.getString("ReceiverID"))
-    }
+    fun UserUpdate(valueOne: String, valueTwo: String) =
+        db.update (
+            "insert into users Values ( ?, ? )",
+            valueOne, valueTwo
+        )
 }
