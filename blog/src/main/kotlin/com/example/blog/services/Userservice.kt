@@ -6,25 +6,22 @@ import java.util.UUID
 @Service
 class Userservice(private val Repo: UserRepo){
 
-    fun findUsers(): List<User>? = Repo.UserRead("all", "all")
+    fun findUsers(): List<User> = Repo.UserRead("all", "all")
 
-    fun findUserByName(name: String): List<User>? {
-        val user=Repo.UserRead("Name", name)
-        check(user?.isNotEmpty() == true)
-        return user
+    fun findUserByName(name: String): List<User> {
+        check(Repo.ExistsUser("Name", name))
+        return Repo.UserRead("Name", name)
     }
 
-    fun findUserByID(id: String): List<User>?{
-        val user = Repo.UserRead("ID", id)
-        check(user?.isNotEmpty() == true)
-        return user
+    fun findUserByID(id: String): User{
+        check(Repo.ExistsUser("ID", id))
+        return Repo.UserRead("ID", id).first()
     }
 
-    fun createUser(user: User): User {
+    fun createUser(username: String): User {
         val id = UUID.randomUUID().toString()
-        val idcheck = Repo.UserRead("ID", id)
-        check(idcheck?.isEmpty() == true)
-        Repo.UserUpdate(user.name, id)
-        return user.copy(id = id)
+        check(Repo.ExistsUser("ID", id) == false)
+        Repo.UserUpdate(username, id)
+        return User(id = id, name = username)
     }
 }

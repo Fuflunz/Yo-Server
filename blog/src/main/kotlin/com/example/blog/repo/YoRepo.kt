@@ -13,7 +13,7 @@ class YoRepo(private val db: JdbcTemplate){
             id1, id2
         )
 
-    fun YoRead(receiverID: String?): List<Yo>? = db.query("select * from yos where ReceiverID = ?", receiverID!!) { response, _ ->
+    fun YoRead(receiverID: String?): List<Yo> = db.query("select * from yos where ReceiverID = ?", receiverID!!) { response, _ ->
         Yo(response.getString("SenderID"), response.getString("ReceiverID"))
     }
 }
