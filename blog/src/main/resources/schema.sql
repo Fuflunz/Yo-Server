@@ -8,3 +8,9 @@ CREATE TABLE IF NOT EXISTS yos (
 SenderID    VARCHAR  NOT NULL,
 ReceiverID  VARCHAR  NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS userswithpassword (
+ID     VARCHAR(60)  PRIMARY KEY,
+Name   VARCHAR      NOT NULL,
+password VARCHAR    NOT NULL
+);
