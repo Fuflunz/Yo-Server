@@ -3,6 +3,7 @@ package com.example.blog
 import com.example.blog.model.UserCreator
 import com.example.blog.model.UserNoPw
 import com.example.blog.model.YoCreator
+import com.zaxxer.hikari.util.Credentials
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -39,10 +40,12 @@ class Controller(private val yoservice: YoService, private val userservice: User
         return runCatching { userservice.findUserByID(id).toUserEntity() }.getOrElse {logger.info { "not Found" }; ResponseEntity.notFound().build() }
     }
 
-    @GetMapping("/yos/{ID}/{Password}")
-    fun getyos( @PathVariable ID: String, @PathVariable Password: String): ResponseEntity<List<Yo>> {
+    @PostMapping("/getyos")
+    fun getyos( @RequestBody credentials: User): ResponseEntity<List<Yo>> {
+        val id = credentials.id
+        val password = credentials.password
         logger.info { "getting those yos" }
-        return runCatching { yoservice.recyos(userservice.findUserByID(ID), Password).toYoEntity() }.getOrElse { ResponseEntity.notFound().build() }
+        return runCatching { yoservice.recyos(userservice.findUserByID(id), password).toYoEntity() }.getOrElse { ResponseEntity.notFound().build() }
     }
 
     @PostMapping("/createUser")
