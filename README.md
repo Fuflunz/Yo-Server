@@ -7,7 +7,7 @@ It is capable of creating and managing users that are able to communicate using 
 The application is divided by the Rest-Controller, the Services, the Repository and a SQL-Database wich communicate in this order.
 The Rest-Controller manages the API, while the services provide the functional layer of all post- and get-requests. The Repository serves as a interface between services and Database.
 
-The structure still has a lot of security issues beginning with the fact that this structure runs on http and not https.
+The application still has a lot of security issues beginning with the fact it is running on http and not https.
 Also the application is stateless wich means there is no sessionhandling.
 This means that userpassword, for example needs to be send everytime an action is commited.
 The application has proper passwordhashing.
