@@ -9,7 +9,7 @@ The Rest-Controller manages the API, while the services provide the functional l
 
 The application still has a lot of security issues beginning with the fact it is running on http and not https.
 Also the application is stateless wich means there is no sessionhandling.
-This means that userpassword, for example needs to be send everytime an action is commited.
+This means that userpasswords, for example need to be send everytime an action is commited.
 The application has proper passwordhashing.
 
 Unit tests that test the Service-Structure are also addet.
