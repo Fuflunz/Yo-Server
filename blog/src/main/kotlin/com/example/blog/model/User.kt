@@ -2,5 +2,6 @@ package com.example.blog
 
 data class User(
     val name: String,
-    val id: String
+    val id: String,
+    var password: String
 )
