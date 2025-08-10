@@ -1,4 +1,4 @@
-The "YO"-Server:
+#YO-Server
 
 The "YO"-Server is a Spring-Boot project that includes the main principles of a service-oriented backend structure. 
 
